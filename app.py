@@ -32,8 +32,8 @@ def get_sentiment(review, tokenizer=phobert_tokenizer, model=phobert_model):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    result = {'sentiment_label': '', 'message': ''}
-    
+    result = {'sentiment_label': '', 'message': '', 'user_input': ''}
+
     if request.method == 'POST':
         user_input = request.form['user_input']
         sentiment_label = get_sentiment(user_input)
@@ -41,6 +41,7 @@ def index():
         result = {
             'sentiment_label': sentiment_label[0],
             'message': '',
+            'user_input': user_input
         }
 
         if sentiment_label[0] == 'An toàn':
